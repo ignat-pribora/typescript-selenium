@@ -34,20 +34,16 @@ describe("Login form", function() {
     // browser.go(App.url);
     // await page.isLoad();
 
-      driver.get('https://mail.ru/');
+      driver.get('https://brunoyam.com/verify');
       await driver.sleep(1000);
-      await driver.findElement(By.css('[name="login"]')).sendKeys("i123")  ;
+      await driver.findElement(By.css('[name="fio"]')).sendKeys("Шарина Юлия Валерьевна")  ;
       await driver.sleep(1000);
-      await driver.findElement(By.css('[name="login"]')).sendKeys(Key.ENTER);
+      await driver.findElement(By.css('[name="number"]')).sendKeys("TE250-1725");
       await driver.sleep(1000);
-      await driver.findElement(By.css('[name="password"]')).sendKeys("2341");
+      await driver.findElement(By.css('[type="submit"]')).click() ;
       await driver.sleep(1000);
-
-      await driver.findElement(By.css('[name="password"]')).sendKeys(Key.ENTER);
-
-      // await driver.findElement(By.css('[type=button]')).click() ;
+      await driver.findElement(By.css('.list-group')) ;
       await driver.sleep(1000);
-      await driver.findElement(By.css('.b-toolbar__btn__text b-toolbar__btn__text_pad')).click() ;
       
 
 
@@ -58,16 +54,18 @@ describe("Login form", function() {
     // await assert.equal(await calendarPage.isPage(), true);
   });
 
-  // it("Negative test", async function() {
-  //   debugger;
-  //   browser.go(App.url);
-  //   await page.isLoad();
-  //   await browser.keys(page.email(), App.user.login);
-  //   await browser.keys(page.password(), "qweqweqweqwe");
-  //   await browser.click(page.submit());
-  //   await page.isLoad();
-  //   await assert.equal(await page.isPage(), true);
-  // });
+  it("Negative test", async function() {
+    driver.get('https://brunoyam.com/verify');
+    await driver.sleep(1000);
+    await driver.findElement(By.css('[name="fio"]')).sendKeys("Шарина Юлия Валерьевна")  ;
+    await driver.sleep(1000);
+    await driver.findElement(By.css('[name="number"]')).sendKeys("TE250-172");
+    await driver.sleep(1000);
+    await driver.findElement(By.css('[type="submit"]')).click() ;
+    await driver.sleep(1000);
+    await driver.findElement(By.css('.alert-danger')) ;
+    await driver.sleep(1000);
+  });
 
   after(() => driver && driver.quit());
 });
